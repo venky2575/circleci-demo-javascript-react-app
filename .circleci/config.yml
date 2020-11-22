@@ -1,9 +1,16 @@
-orbs:
-  node: circleci/node@4.0.0
-
 version: 2.1
 
 workflows:
-  app-tests:
+  test-deploy:
     jobs:
-      - node/test
+      - test
+
+jobs:
+  test:
+    docker:
+      - image: cimg/node:14.13.0
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm install
